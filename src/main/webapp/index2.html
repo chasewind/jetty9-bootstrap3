@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>bootstrap3 左侧树形结构菜单</title>
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="resources/css/bootstrap-treeview.min.css" rel="stylesheet">
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/bootstrap-treeview.min.js"></script>
+</head>
+<body>
+	<div id="tree" style="width: 300px;"></div>
+</body>
+<script type="text/javascript">
+	function getTree() {
+		var tree = [ {
+			text : "必备知识",
+			nodes : [ {
+				text : "JAVA",
+				nodes : [ {
+					text : "JAVA基础"
+				}, {
+					text : "JAVA进阶"
+				} ]
+			}, {
+				text : "NOT JAVA",
+				icon:"glyphicon glyphicon-heart"
+			} ]
+		}, {
+			text : "管理员",
+			icon:"glyphicon glyphicon-user"
+		}, {
+			text : "消息通知",
+			icon:"glyphicon glyphicon-envelope"
+		} ];
+		return tree;
+	}
+
+	$('#tree').treeview({
+		data : getTree()
+	});
+	$(function() {
+		//项目参考页：https://github.com/jonmiles/bootstrap-treeview
+		//小图标参考页：http://getbootstrap.com/components/#glyphicons
+	});
+</script>
+</html>
