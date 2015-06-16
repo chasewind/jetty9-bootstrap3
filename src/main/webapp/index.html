@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bootstrap 模板</title>
+<title>Bootstrap 手风琴左侧导航面板</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -12,21 +12,17 @@
 <body>
 	<div class="container">
 		<div style="width: 200px;">
-			<div class="panel-group" id="accordion2">
-				<div class="panel-heading">
-					<strong style="font-size: 30px;">论坛分类</strong>
-				</div>
+			<div class="panel-group" id="accordinA">
 				<div class="panel panel-default">
 					<div class="panel-heading" data-toggle="collapse"
-						data-parent="#accordion2" href="#collapseOne">
+						data-parent="#accordinA" href="#java">
 						<label class="accordion-toggle">Java</label>
 					</div>
-					<div id="collapseOne" class="panel-collapse collapse"
-						style="height: 0px;">
+					<div id="java" class="panel-collapse collapse" style="height: 0px;">
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Java基础</a></li>
-								<li><a href="#">Java面向对象</a></li>
+								<li><a href="#">Java基础知识</a></li>
+								<li><a href="#">Java常用API</a></li>
 								<li><a href="#">Java核心API</a></li>
 								<li><a href="#">JavaEE</a></li>
 							</ul>
@@ -35,32 +31,31 @@
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading" data-toggle="collapse"
-						data-parent="#accordion2" href="#collapseTwo">
+						data-parent="#accordinA" href="#database">
 						<label class="accordion-toggle">数据库</label>
 					</div>
-					<div id="collapseTwo" class="panel-collapse collapse"
+					<div id="database" class="panel-collapse collapse"
 						style="height: 0px;">
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
 								<li><a href="#">SQL基础</a></li>
-								<li><a href="#">Oracle</a></li>
 								<li><a href="#">MySQL</a></li>
+								<li><a href="#">Oracle</a></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading" data-toggle="collapse"
-						data-parent="#accordion2" href="#collapseThree">
-						<label class="accordion-toggle">技术前沿</label>
+						data-parent="#accordinA" href="#operation">
+						<label class="accordion-toggle">运维相关</label>
 					</div>
-					<div id="collapseThree" class="panel-collapse in"
-						style="height: 0px;">
+					<div id="operation" class="panel-collapse in" style="height: 0px;">
 						<div class="panel-body">
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">NoSQL</a></li>
-								<li><a href="#">Hadoop</a></li>
-								<li><a href="#">WebService</a></li>
+								<li><a href="#">Linux</a></li>
+								<li><a href="#">Nginx</a></li>
+								<li><a href="#">Jetty</a></li>
 							</ul>
 						</div>
 					</div>
