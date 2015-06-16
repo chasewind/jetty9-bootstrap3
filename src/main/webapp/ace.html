@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bootstrap ACE顶部效果</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="assets/js/ace-extra.min.js"></script>
+<style type="text/css">
+.navbar {
+	border: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border-radius: 0;
+	margin: 0;
+	padding-left: 0;
+	padding-right: 0;
+	min-height: 45px;
+	position: relative;
+	background: #438eb9
+}
+
+.navbar>.container {
+	padding-left: 0;
+	padding-right: 0
+}
+
+.navbar .navbar-text, .navbar .navbar-link {
+	color: #fff
+}
+
+.navbar .navbar-brand {
+	color: #fff;
+	font-size: 24px;
+	text-shadow: none;
+	padding-top: 10px;
+	padding-bottom: 10px
+}
+
+.navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
+	color: #fff
+}
+
+.navbar .navbar-header {
+	margin: 0 !important
+}
+
+.navbar .navbar-nav>li>a, .navbar .navbar-nav>li>a:hover, .navbar .navbar-nav>li>a:focus
+	{
+	font-size: 13px;
+	text-shadow: none;
+	color: #fff
+}
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+	position: fixed
+}
+
+.navbar-container {
+	padding-left: 10px;
+	padding-right: 20px
+}
+
+.navbar-container.container {
+	padding-left: 0;
+	padding-right: 0
+}
+
+.ace-nav {
+	height: 100%;
+	margin: 0 !important
+}
+
+.ace-nav>li {
+	line-height: 45px;
+	height: 45px;
+	border-left: 1px solid #DDD;
+	padding: 0;
+	position: relative;
+	float: left !important
+}
+
+.ace-nav>li:first-child {
+	border-left: none
+}
+
+.ace-nav>li>a {
+	background-color: #2e6589;
+	color: #FFF;
+	display: block;
+	line-height: inherit;
+	text-align: center;
+	height: 100%;
+	width: auto;
+	min-width: 50px;
+	padding: 0 8px;
+	position: relative
+}
+
+.ace-nav>li>a>[class*="icon-"] {
+	font-size: 16px;
+	color: #FFF;
+	display: inline-block;
+	width: 20px;
+	text-align: center
+}
+
+.ace-nav>li>a>.badge {
+	position: relative;
+	top: -4px;
+	left: 2px;
+	padding-right: 5px;
+	padding-left: 5px
+}
+
+.ace-nav>li>a:hover, .ace-nav>li>a:focus {
+	background-color: #2c5976
+}
+
+.ace-nav>li.open>a {
+	background-color: #2c5976 !important
+}
+
+.ace-nav>li.open>a {
+	color: #FFF !important
+}
+
+.ace-nav>li.grey>a {
+	background-color: #555
+}
+
+.ace-nav>li.grey>a:hover, .ace-nav>li.grey>a:focus {
+	background-color: #4b4b4b
+}
+
+.ace-nav>li.open.grey>a {
+	background-color: #4b4b4b !important
+}
+
+.ace-nav>li.purple>a {
+	background-color: #892e65
+}
+
+.ace-nav>li.purple>a:hover, .ace-nav>li.purple>a:focus {
+	background-color: #762c59
+}
+
+.ace-nav>li.open.purple>a {
+	background-color: #762c59 !important
+}
+
+.ace-nav>li.green>a {
+	background-color: #2e8965
+}
+
+.ace-nav>li.green>a:hover, .ace-nav>li.green>a:focus {
+	background-color: #2c7659
+}
+
+.ace-nav>li.open.green>a {
+	background-color: #2c7659 !important
+}
+
+.ace-nav>li.light-blue>a {
+	background-color: #62a8d1
+}
+
+.ace-nav>li.light-blue>a:hover, .ace-nav>li.light-blue>a:focus {
+	background-color: #579ec8
+}
+
+.ace-nav>li.open.light-blue>a {
+	background-color: #579ec8 !important
+}
+
+.ace-nav>li.light-blue2>a {
+	background-color: #42a8e1
+}
+
+.ace-nav>li.light-blue2>a:hover, .ace-nav>li.light-blue2>a:focus {
+	background-color: #359fd9
+}
+
+.ace-nav>li.open.light-blue2>a {
+	background-color: #359fd9 !important
+}
+
+.ace-nav>li.red>a {
+	background-color: #b74635
+}
+
+.ace-nav>li.red>a:hover, .ace-nav>li.red>a:focus {
+	background-color: #a34335
+}
+
+.ace-nav>li.open.red>a {
+	background-color: #a34335 !important
+}
+
+.ace-nav>li.light-green>a {
+	background-color: #9abc32
+}
+
+.ace-nav>li.light-green>a:hover, .ace-nav>li.light-green>a:focus {
+	background-color: #8ba832
+}
+
+.ace-nav>li.open.light-green>a {
+	background-color: #8ba832 !important
+}
+
+.ace-nav>li.light-purple>a {
+	background-color: #cb6fd7
+}
+
+.ace-nav>li.light-purple>a:hover, .ace-nav>li.light-purple>a:focus {
+	background-color: #c263ce
+}
+
+.ace-nav>li.open.light-purple>a {
+	background-color: #c263ce !important
+}
+
+.ace-nav>li.light-orange>a {
+	background-color: #f79263
+}
+
+.ace-nav>li.light-orange>a:hover, .ace-nav>li.light-orange>a:focus {
+	background-color: #f28653
+}
+
+.ace-nav>li.open.light-orange>a {
+	background-color: #f28653 !important
+}
+
+.ace-nav>li.light-pink>a {
+	background-color: #f4dae5
+}
+
+.ace-nav>li.light-pink>a:hover, .ace-nav>li.light-pink>a:focus {
+	background-color: #eeccda
+}
+
+.ace-nav>li.open.light-pink>a {
+	background-color: #eeccda !important
+}
+
+.ace-nav>li.dark>a {
+	background-color: #404040
+}
+
+.ace-nav>li.dark>a:hover, .ace-nav>li.dark>a:focus {
+	background-color: #363636
+}
+
+.ace-nav>li.open.dark>a {
+	background-color: #363636 !important
+}
+
+.ace-nav>li.white-opaque>a {
+	background-color: rgba(255, 255, 255, 0.8)
+}
+
+.ace-nav>li.white-opaque>a:hover, .ace-nav>li.white-opaque>a:focus {
+	background-color: rgba(245, 245, 245, 0.8)
+}
+
+.ace-nav>li.open.white-opaque>a {
+	background-color: rgba(245, 245, 245, 0.8) !important
+}
+
+.ace-nav>li.dark-opaque>a {
+	background-color: rgba(0, 0, 0, 0.2)
+}
+
+.ace-nav>li.dark-opaque>a:hover, .ace-nav>li.dark-opaque>a:focus {
+	background-color: rgba(0, 0, 0, 0.2)
+}
+
+.ace-nav>li.open.dark-opaque>a {
+	background-color: rgba(0, 0, 0, 0.2) !important
+}
+
+.ace-nav>li.margin-4 {
+	margin-left: 4px
+}
+
+.ace-nav>li.margin-3 {
+	margin-left: 3px
+}
+
+.ace-nav>li.margin-2 {
+	margin-left: 2px
+}
+
+.ace-nav>li.margin-1 {
+	margin-left: 1px
+}
+
+.ace-nav>li.no-border {
+	border: none !important
+}
+
+.ace-nav>li .dropdown-menu {
+	z-index: 1031
+}
+
+.ace-nav .nav-user-photo {
+	margin: -4px 8px 0 0;
+	border-radius: 100%;
+	border: 2px solid #FFF;
+	max-width: 40px
+}
+
+.ace-nav li:last-child a [class^="icon-"] {
+	display: inline-block;
+	width: 1.25em;
+	text-align: center
+}
+/* test */
+.diyFloat {
+	float: left;
+	display: block;
+	line-height: 45px;
+	margin-left: 5px;
+}
+</style>
+</head>
+<body>
+	<div class="navbar navbar-default" id="navbar">
+		<script type="text/javascript">
+			try {
+				ace.settings.check('navbar', 'fixed')
+			} catch (e) {
+			}
+		</script>
+
+		<div class="navbar-container" id="navbar-container">
+			<div class="navbar-header pull-left">
+				<a href="#" class="navbar-brand"> <small> <i
+						class="icon-leaf"></i> Ace Admin
+				</small>
+				</a>
+			</div>
+
+			<div class="navbar-header pull-right" role="navigation">
+				<ul class="nav ace-nav">
+					<li class="grey"><a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <i class="icon-tasks"></i> <span
+							class="badge badge-grey">4</span>
+					</a>
+
+						<ul
+							class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+							<li class="dropdown-header"><i class="icon-ok"></i> 4 Tasks
+								to complete</li>
+
+							<li><a href="#">
+									<div class="clearfix">
+										<span class="pull-left">Software Update</span> <span
+											class="pull-right">65%</span>
+									</div>
+
+									<div class="progress progress-mini ">
+										<div style="width: 65%" class="progress-bar "></div>
+									</div>
+							</a></li>
+
+							<li><a href="#">
+									<div class="clearfix">
+										<span class="pull-left">Hardware Upgrade</span> <span
+											class="pull-right">35%</span>
+									</div>
+
+									<div class="progress progress-mini ">
+										<div style="width: 35%"
+											class="progress-bar progress-bar-danger"></div>
+									</div>
+							</a></li>
+
+							<li><a href="#">
+									<div class="clearfix">
+										<span class="pull-left">Unit Testing</span> <span
+											class="pull-right">15%</span>
+									</div>
+
+									<div class="progress progress-mini ">
+										<div style="width: 15%"
+											class="progress-bar progress-bar-warning"></div>
+									</div>
+							</a></li>
+
+							<li><a href="#">
+									<div class="clearfix">
+										<span class="pull-left">Bug Fixes</span> <span
+											class="pull-right">90%</span>
+									</div>
+
+									<div class="progress progress-mini progress-striped active">
+										<div style="width: 90%"
+											class="progress-bar progress-bar-success"></div>
+									</div>
+							</a></li>
+
+							<li><a href="#"> See tasks with details <i
+									class="icon-arrow-right"></i>
+							</a></li>
+						</ul></li>
+
+					<li class="purple"><a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <i
+							class="icon-bell-alt icon-animated-bell"></i> <span
+							class="badge badge-important">8</span>
+					</a>
+
+						<ul
+							class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+							<li class="dropdown-header"><i class="icon-warning-sign"></i>
+								8 Notifications</li>
+
+							<li><a href="#">
+									<div class="clearfix">
+										<span class="pull-left"> <i
+											class="btn btn-xs no-hover btn-pink icon-comment"></i> New
+											Comments
+										</span> <span class="pull-right badge badge-info">+12</span>
+									</div>
+							</a></li>
+
+							<li><a href="#"> <i
+									class="btn btn-xs btn-primary icon-user"></i> Bob just signed
+									up as an editor ...
+							</a></li>
+
+							<li><a href="#">
+									<div class="clearfix">
+										<span class="pull-left"> <i
+											class="btn btn-xs no-hover btn-success icon-shopping-cart"></i>
+											New Orders
+										</span> <span class="pull-right badge badge-success">+8</span>
+									</div>
+							</a></li>
+
+							<li><a href="#">
+									<div class="clearfix">
+										<span class="pull-left"> <i
+											class="btn btn-xs no-hover btn-info icon-twitter"></i>
+											Followers
+										</span> <span class="pull-right badge badge-info">+11</span>
+									</div>
+							</a></li>
+
+							<li><a href="#"> See all notifications <i
+									class="icon-arrow-right"></i>
+							</a></li>
+						</ul></li>
+
+					<li class="green"><a data-toggle="dropdown"
+						class="dropdown-toggle" href="#"> <i
+							class="icon-envelope icon-animated-vertical"></i> <span
+							class="badge badge-success">5</span>
+					</a>
+
+						<ul
+							class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+							<li class="dropdown-header"><i class="icon-envelope-alt"></i>
+								5 Messages</li>
+
+							<li><a href="#"> <img src="assets/avatars/avatar.png"
+									class="msg-photo" alt="Alex's Avatar" /> <span
+									class="msg-body"> <span class="msg-title"> <span
+											class="blue">Alex:</span> Ciao sociis natoque penatibus et
+											auctor ...
+									</span> <span class="msg-time"> <i class="icon-time"></i> <span>a
+												moment ago</span>
+									</span>
+								</span>
+							</a></li>
+
+							<li><a href="#"> <img src="assets/avatars/avatar3.png"
+									class="msg-photo" alt="Susan's Avatar" /> <span
+									class="msg-body"> <span class="msg-title"> <span
+											class="blue">Susan:</span> Vestibulum id ligula porta felis
+											euismod ...
+									</span> <span class="msg-time"> <i class="icon-time"></i> <span>20
+												minutes ago</span>
+									</span>
+								</span>
+							</a></li>
+
+							<li><a href="#"> <img src="assets/avatars/avatar4.png"
+									class="msg-photo" alt="Bob's Avatar" /> <span class="msg-body">
+										<span class="msg-title"> <span class="blue">Bob:</span>
+											Nullam quis risus eget urna mollis ornare ...
+									</span> <span class="msg-time"> <i class="icon-time"></i> <span>3:15
+												pm</span>
+									</span>
+								</span>
+							</a></li>
+
+							<li><a href="inbox.html"> See all messages <i
+									class="icon-arrow-right"></i>
+							</a></li>
+						</ul></li>
+
+					<li class="light-blue"><a data-toggle="dropdown" href="#"
+						class="dropdown-toggle"> <img class="nav-user-photo"
+							src="assets/avatars/user.jpg" alt="Jason's Photo" /> <span
+							class="user-info"> <small>Welcome,</small> Jason
+						</span> <i class="icon-caret-down"></i>
+					</a>
+
+						<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li><a href="#"> <i class="icon-cog"></i> Settings
+							</a></li>
+
+							<li><a href="#"> <i class="icon-user"></i> Profile
+							</a></li>
+
+							<li class="divider"></li>
+
+							<li><a href="#"> <i class="icon-off"></i> Logout
+							</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- ------------左右分开-------------- -->
+	<div style="width: 100%">
+		<div class="pull-left">
+			<label>Left</label>
+		</div>
+		<div class="pull-right">
+			<ul>
+				<li class="diyFloat">AAAA</li>
+				<li class="diyFloat">BBBB</li>
+				<li class="diyFloat">CCCC</li>
+				<li class="diyFloat">DDDD</li>
+
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
