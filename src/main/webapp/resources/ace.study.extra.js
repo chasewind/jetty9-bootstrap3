@@ -130,7 +130,7 @@ ace.settings = {
 };
 ace.settings.check = function(c, e) {
 	if (!ace.settings.exists(c, e)) {
-		return
+		return;
 	}
 	var a = ace.settings.is(c, e);
 	var b = {

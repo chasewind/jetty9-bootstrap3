@@ -1,10 +1,8 @@
-package com.belief.module;
+package com.belief.config;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
@@ -21,17 +19,17 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
+import com.belief.Scanned;
+
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackageClasses = Scanned.class, includeFilters = @Filter(Controller.class), useDefaultFilters = false)
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
-	private static Logger logger = LoggerFactory.getLogger(WebMvcConfig.class);
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		logger.info("static resources");
-		registry.addResourceHandler("/resources/**").addResourceLocations(
-				"/resources/");
+		registry.addResourceHandler("/resources/**", "/assets/**")
+				.addResourceLocations("/resources/", "/assets/");
 	}
 
 	@Bean
@@ -77,7 +75,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public ThymeleafViewResolver viewResolver() {
-		logger.info("viewResolver");
 		ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
 		thymeleafViewResolver.setTemplateEngine(templateEngine());
 		thymeleafViewResolver.setCharacterEncoding("UTF-8");
