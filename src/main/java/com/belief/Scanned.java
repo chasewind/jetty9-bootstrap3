@@ -1,4 +1,4 @@
-package com.belief.module;
+package com.belief;
 
 public class Scanned {
 
