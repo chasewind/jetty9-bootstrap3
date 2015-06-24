@@ -4,7 +4,7 @@ public class ForwardUser extends AbstractActiveUserHandler {
 
 	@Override
 	public void saveInRecord() {
-		list.add("ForwardUser");
+		records.add("ForwardUser");
 	}
 
 }

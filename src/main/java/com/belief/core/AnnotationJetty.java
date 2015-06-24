@@ -1,9 +1,11 @@
 package com.belief.core;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.eclipse.jetty.annotations.AnnotationConfiguration;
 import org.eclipse.jetty.annotations.ClassInheritanceHandler;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.util.MultiMap;
+import org.eclipse.jetty.util.ConcurrentHashSet;
 import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.springframework.web.WebApplicationInitializer;
@@ -33,12 +35,24 @@ public class AnnotationJetty {
 					@Override
 					public void preConfigure(final WebAppContext context)
 							throws Exception {
-						MultiMap<String> map = new MultiMap<String>();
-						map.add(WebApplicationInitializer.class.getName(),
-								WebAppInitializer.class.getName());
-						context.setAttribute(CLASS_INHERITANCE_MAP, map);
+						// MultiMap<String> map = new MultiMap<String>();
+						// map.add(WebApplicationInitializer.class.getName(),
+						// WebAppInitializer.class.getName());
+						// context.setAttribute(CLASS_INHERITANCE_MAP, map);
+						// _classInheritanceHandler = new
+						// ClassInheritanceHandler(
+						// map);
+						/************ new version *********/
+						ConcurrentHashSet<String> configSet = new ConcurrentHashSet<String>();
+						configSet.add(WebAppInitializer.class.getName());
+						ConcurrentHashMap<String, ConcurrentHashSet<String>> configMap = new ConcurrentHashMap<String, ConcurrentHashSet<String>>();
+						configMap.put(
+								WebApplicationInitializer.class.getName(),
+								configSet);
+						context.setAttribute(CLASS_INHERITANCE_MAP, configMap);
 						_classInheritanceHandler = new ClassInheritanceHandler(
-								map);
+								configMap);
+
 					}
 				} });
 		webAppContext.setParentLoaderPriority(true);

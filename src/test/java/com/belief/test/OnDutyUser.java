@@ -4,7 +4,7 @@ public class OnDutyUser extends AbstractActiveUserHandler {
 
 	@Override
 	public void saveInRecord() {
-		list.add("OnDutyUser");
+		records.add("OnDutyUser");
 	}
 
 }

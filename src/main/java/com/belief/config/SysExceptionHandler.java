@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @EnableWebMvc
-@ControllerAdvice
+@ControllerAdvice(basePackages = "com.belief")
 public class SysExceptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	public ModelAndView handleException(HttpServletRequest req,
