@@ -33,6 +33,7 @@ public class AnnotationJetty {
         webAppContext.setConfigurations(new Configuration[] {new AnnotationConfiguration() {
             @Override
             public void preConfigure(final WebAppContext context) throws Exception {
+                /*************** version 9.0.6 ****************/
                 // MultiMap<String> map = new MultiMap<String>();
                 // map.add(WebApplicationInitializer.class.getName(),
                 // WebAppInitializer.class.getName());
