@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Bootstrap</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6"
+				style="background-color: #dedef8; box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">你来找我啊</div>
+			<div class="col-md-6"
+				style="background-color: #ccdac8; box-shadow: inset 1px -1px 1px #444, inset -1px 1px 1px #444;">你来打我啊</div>
+		</div>
+		<div class="row">
+			<div class="progress progress-striped active">
+				<div class="progress-bar" style="width: 15%">
+					<span class="sr-only">15% completed</span>
+				</div>
+			</div>
+			<div class="progress progress-striped active">
+				<div class="progress-bar" style="width: 45%">
+					<span class="sr-only">45% completed</span>
+				</div>
+			</div>
+			<div class="progress progress-striped active">
+				<div class="progress-bar" style="width: 85%">
+					<span class="sr-only">85% completed</span>
+				</div>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle"
+					data-toggle="dropdown">
+					下拉列表测试<b class="caret"></b>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="#">公司财务</a></li>
+					<li class="divider"></li>
+					<li><a href="#">公司制度</a></li>
+					<li class="divider"></li>
+					<li><a href="#">公司章程</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#home">主页</a></li>
+		<li class=""><a data-toggle="tab" href="#base">替天行道 </a></li>
+		<li class="dropdown">
+			<a data-toggle="dropdown" href="#"
+			class="dropdown-toggle">梁山好汉<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<li data-toggle="tab"><a href="#likui">李逵</a></li>
+				<li data-toggle="tab"><a href="#songjiang">宋江</a></li>
+				<li data-toggle="tab"><a href="#wusong">武松</a></li>
+			</ul></li>
+	</ul>
+	<div class="table-content">
+		<div id="home" class='table-panel fade active in'><p>【梁山好汉集结地】</p></div>
+		<div id="base" class='table-panel fade'><p>系统管理,大碗喝酒，大秤分金</p></div>
+		<div id="likui" class='table-panel fade'><p>憨傻莫过此人</p></div>
+		<div id="songjiang" class='table-panel fade'><p>白脸黑面</p></div>
+		<div id="wusong" class='table-panel fade'><p>雪夜上梁山</p></div>
+	</div>
+</body>
+</html>

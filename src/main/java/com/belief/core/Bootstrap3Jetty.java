@@ -13,20 +13,17 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class Bootstrap3Jetty {
-	private static Logger logger = LoggerFactory
-			.getLogger(Bootstrap3Jetty.class);
+	private static Logger logger = LoggerFactory.getLogger(Bootstrap3Jetty.class);
+
 	public static void main(String[] args) throws Exception {
 		Server server = new Server(8080);
 		WebAppContext webapp = new WebAppContext();
 		webapp.setResourceBase("src/main/webapp");
 		webapp.setContextPath("/");
-		webapp.setOverrideDescriptors(Arrays
-				.asList(new String[] { Bootstrap3Jetty.class.getResource("/")
-						+ "web_override_development.xml" }));
+		webapp.setOverrideDescriptors(Arrays.asList(new String[] { Bootstrap3Jetty.class.getResource("/") + "web_override_development.xml" }));
 		server.setHandler(webapp);
 		logger.info("start......");
 		server.start();
 		server.join();
-
 	}
 }
