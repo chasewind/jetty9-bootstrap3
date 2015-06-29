@@ -30,13 +30,15 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	static class FaviconController {
 		@RequestMapping("favicon.ico")
 		String favicon() {
-			return "forward:/resources/images/favicon.ico";
+			return "forward:/resources/images/favicon.ico.png";
 		}
 	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/resources/**", "/assets/**").addResourceLocations("/resources/", "/assets/");
+		// .addResourceHandler("/resources/**",
+		// "/assets/**").addResourceLocations("/resources/", "/assets/");
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 
 	@Bean
