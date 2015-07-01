@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>layout-html</title>
+ <link href="resources/css/bootstrap-combined.min.css" rel="stylesheet">
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="resources/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet">
+<link href="resources/css/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="resources/js/jquery-1.10.2.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="resources/js/bootstrap-datetimepicker.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<button type="button" class="btn btn-default">默认按钮</button>
+
+			<!-- 提供额外的视觉效果，标识一组按钮中的原始动作 -->
+			<button type="button" class="btn btn-primary">原始按钮</button>
+
+			<!-- 表示一个成功的或积极的动作 -->
+			<button type="button" class="btn btn-success">成功按钮</button>
+
+			<!-- 信息警告消息的上下文按钮 -->
+			<button type="button" class="btn btn-info">信息按钮</button>
+
+			<!-- 表示应谨慎采取的动作 -->
+			<button type="button" class="btn btn-warning">警告按钮</button>
+
+			<!-- 表示一个危险的或潜在的负面动作 -->
+			<button type="button" class="btn btn-danger">危险按钮</button>
+
+			<!-- 并不强调是一个按钮，看起来像一个链接，但同时保持按钮的行为 -->
+			<button type="button" class="btn btn-link">链接按钮</button>
+		</div>
+		<div class="row">
+			<div class="col-xs-3 span3">
+				<button type="button" class="btn btn-default btn-xd btn-block">
+					块级的按钮</button>
+				<button type="button" class="btn btn-default btn-xd btn-block">
+					块级的按钮</button>
+				<button type="button" id="getDateValue"
+					class="btn btn-default btn-xd btn-block">获取时间</button>
+			</div>
+			<div class="col-xs-9 span9">
+				<div class="row">
+					<div id="datetimepicker" class="input-append date">
+						<input type="text" id="startDate"></input> <span class="add-on"> <i
+							data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+						</span>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript">
+	$(function() {
+		//https://github.com/tarruda/bootstrap-datetimepicker
+		//http://tarruda.github.io/bootstrap-datetimepicker/
+		 $('#datetimepicker').datetimepicker({
+		        format: 'yyyy-MM-dd hh:mm:ss',
+		        language: 'zh-CN',
+		        pickDate: true,
+		        pickTime: true,
+		        hourStep: 1,
+		        minuteStep: 15,
+		        secondStep: 30,
+		        inputMask: true
+		      });
+		$("#getDateValue").click(function() {
+			alert( $('#startDate').val());
+		});
+	});
+</script>
+</html>

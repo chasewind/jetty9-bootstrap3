@@ -21,7 +21,6 @@ public class IndexController {
             Product product = new Product();
             product.setId(i);
             product.setName(RandomStringUtils.randomAlphanumeric(6));
-            // product.setName(RandomUtils.nextInt(2000, 8000) + "");
             product.setPrice(RandomUtils.nextDouble(1.0, 100.0) + "");
             productList.add(product);
         }
@@ -39,7 +38,7 @@ public class IndexController {
 
     @ResponseBody
     @RequestMapping("/getJsonData")
-    public PageInfo<Product> getJsonData(int offset, int limit) {
+    public PageInfo<Product> getJsonData(int offset, int limit, String search) {
         PageInfo<Product> pageInfo = new PageInfo<Product>();
         List<Product> list = new ArrayList<Product>();
         for (int i = offset; i < offset + limit; i++) {
