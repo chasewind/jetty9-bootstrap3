@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dialog-html</title>
+<link href="resources/css/bootstrap.min.css" rel="stylesheet">
+<link href="resources/css/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/js/jquery-ui-1.9.2.custom.min.js"></script>
+</head>
+<body>
+	<input type="button" id="showDialog" value="clickMe" />
+	<div id="dialog">
+	<div>
+		<label>aaaaaa</label><input type="text" />
+	</div>
+	<div id="dialog">
+		<label>bbbbbbb</label><input type="text" />
+	</div>
+	<div id="dialog">
+		<label>ccccccc</label><input type="text" />
+	</div>
+	<div id="dialog">
+		<label>dddddd</label><input type="text" />
+	</div>
+	</div>
+	
+</body>
+<script type="text/javascript">
+	$(function() {
+		$('#dialog').dialog({
+			autoOpen : false,
+			width : 600,
+			buttons : {
+				"Ok" : function() {
+					$(this).dialog("close");
+				},
+				"Cancel" : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+		$("#showDialog").click(function() {
+			$('#dialog').dialog('open');
+			return false;
+		});
+	});
+</script>
+</html>
