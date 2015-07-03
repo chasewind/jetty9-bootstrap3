@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Bootstrap3 table插件-ajax</title>
+<link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="resources/assets/css/font-awesome.min.css" />
+<link rel="stylesheet" href="resources/assets/css/jquery-ui-1.10.3.full.min.css" />
+<link rel="stylesheet" href="resources/assets/css/ui.jqgrid.css" />
+
+
+		<link rel="stylesheet" href="resources/assets/css/ace.min.css" />
+		<link rel="stylesheet" href="resources/assets/css/ace-rtl.min.css" />
+		<link rel="stylesheet" href="resources/assets/css/ace-skins.min.css" />
+
+
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/bootstrap.min.js"></script>
+<script src="resources/assets/js/jquery-ui-1.10.3.full.min.js"></script>
+<script src="resources/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
+<script src="resources/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<table id="table-javascript"></table>
+			<div id="grid-pager"></div>
+		</div>
+	</div>
+	
+</body>
+<script type="text/javascript" th:inline="javascript">
+	$(function() {
+		$('#table-javascript').jqGrid({
+			caption: "广告列表",
+			  datatype: "json",
+			method : 'get',
+			url : 'getGridData',
+			height : 500,
+			  autowidth: true,
+			rowList:[10,20,30],
+	        pager : "#grid-pager",
+	        colNames: ['id','name', 'price'],
+			colModel: [{
+	            name: 'id',
+	            index: 'id',
+	            width: 60
+	           },
+	        	{
+	            name: 'name',
+	            index: 'name',
+	            width: 90
+	            },
+	            {
+		            name: 'price',
+		            index: 'price',
+		            width: 90
+		        }
+	        ]
+		});
+	});
+</script>
+</html>
