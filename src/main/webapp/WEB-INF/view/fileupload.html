@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Bootstrap3 fileUpload</title>
+<link href="/resources/js/uploadify/uploadify.css" rel="stylesheet" />
+<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
+
+<script src="/resources/js/jquery.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/js/uploadify/jquery.uploadify.js"></script>
+<!-- <script src="/resources/js/uploadify/jquery.uploadify.min.js"></script> -->
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<input type="file" name="file_upload" id="file_upload" />
+		</div>
+	</div>
+
+</body>
+<script type="text/javascript" th:inline="javascript">
+$(function() {
+	//http://www.uploadify.com/download/
+	$('#file_upload').uploadify({
+		//auto:false,
+		'swf':'/resources/js/uploadify/uploadify.swf',
+		'uploadLimit': 5, 
+		'multi':true,
+		'buttonText': '选择文件',
+		'fileTypeDesc' : '选择文件',
+		 'removeCompleted': false,
+		'fileObjName': 'file',
+		//'fileTypeExts':'*.jpeg; *.jpg; *.png',
+		'swf':'/resources/js/uploadify/uploadify.swf',
+		'uploader':'/upload/uploadSingleFile',
+		'onUploadSuccess' : function(file, serverData, response) {
+		}
+	});
+});
+</script>
+</html>
