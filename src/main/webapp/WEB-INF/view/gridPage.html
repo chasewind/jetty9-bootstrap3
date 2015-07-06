@@ -7,11 +7,12 @@
 <link rel="stylesheet" href="resources/assets/css/font-awesome.min.css" />
 <link rel="stylesheet" href="resources/assets/css/jquery-ui-1.10.3.full.min.css" />
 <link rel="stylesheet" href="resources/assets/css/ui.jqgrid.css" />
+<!-- <link href="resources/css/bootstrap-combined.min.css" rel="stylesheet"/> -->
+<!-- <link href="resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/> -->
 
-
-		<link rel="stylesheet" href="resources/assets/css/ace.min.css" />
-		<link rel="stylesheet" href="resources/assets/css/ace-rtl.min.css" />
-		<link rel="stylesheet" href="resources/assets/css/ace-skins.min.css" />
+<link rel="stylesheet" href="resources/assets/css/ace.min.css" />
+<link rel="stylesheet" href="resources/assets/css/ace-rtl.min.css" />
+<link rel="stylesheet" href="resources/assets/css/ace-skins.min.css" />
 
 
 <script src="resources/js/jquery.min.js"></script>
@@ -19,6 +20,7 @@
 <script src="resources/assets/js/jquery-ui-1.10.3.full.min.js"></script>
 <script src="resources/assets/js/jqGrid/jquery.jqGrid.min.js"></script>
 <script src="resources/assets/js/jqGrid/i18n/grid.locale-en.js"></script>
+<!-- <script src="resources/js/bootstrap-datetimepicker.min.js"></script> -->
 </head>
 <body>
 	<div class="container">
@@ -27,16 +29,91 @@
 			<div id="grid-pager"></div>
 		</div>
 	</div>
-	
+	<div id="addAdvertisInfoDlg">
+	<form class="form-horizontal" role="form">
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">经度</label>
+			<div class="col-sm-8">
+				<input type="text" name="lon" class="form-control"  placeholder="请输入经度"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">纬度</label>
+			<div class="col-sm-8"> 
+				<input type="text" name="lat" class="form-control"  placeholder="请输入纬度"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">链接</label>
+			<div class="col-sm-8"> 
+				<input type="text" name="link" class="form-control"  placeholder="请输入链接"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">后缀</label>
+			<div class="col-sm-8"> 
+				<input type="text" name="suffix" class="form-control"  placeholder="请输入后缀"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">标题</label>
+			<div class="col-sm-8"> 
+				<input type="text" name="title" class="form-control"  placeholder="请输入标题"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">总价</label>
+			<div class="col-sm-8"> 
+				<input type="text" name="amount" class="form-control"  placeholder="请输入总价"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">单价</label>
+			<div class="col-sm-8"> 
+				<input type="text" name="price" class="form-control"  placeholder="请输入单价"/>
+			</div>
+		</div>
+		
+		<div class="form-group">
+			<label  class="col-sm-2 control-label">结束时间</label>
+			<div class="col-sm-8"> 
+			<input type="text" id="datepicker" class="form-control" />
+			</div>
+		</div>
+	</form>
+</div>
+<button type="button" class="btn btn-primary" id="publishAdBtn">发布广告</button>
 </body>
 <script type="text/javascript" th:inline="javascript">
 	$(function() {
+		$( "#datepicker" ).datepicker({
+			showOtherMonths: true,
+			selectOtherMonths: false,
+			dateFormat:"yy-mm-dd"
+		});
+		$('#addAdvertisInfoDlg').dialog({
+			title:"新增广告",
+			autoOpen : false,
+			width : 400,
+			buttons : {
+				"确定" : function() {
+					$(this).dialog("close");
+				},
+				"取消" : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+		$("#publishAdBtn").click(function() {
+			$('#addAdvertisInfoDlg').dialog('open');
+			return false;
+		});
 		$('#table-javascript').jqGrid({
 			caption: "广告列表",
 			  datatype: "json",
 			method : 'get',
 			url : 'getGridData',
-			height : 500,
+			height : 280,
 			  autowidth: true,
 			rowList:[10,20,30],
 	        pager : "#grid-pager",
