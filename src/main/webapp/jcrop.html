@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+<link rel="stylesheet" href="/resources/js/jcrop/css/jquery.Jcrop.css"
+	type="text/css" />
+<script src="resources/js/jquery.min.js"></script>
+<script src="/resources/js/jcrop/js/jquery.Jcrop.min.js"></script>
+<script type="text/javascript">
+function showCoords(c){
+	$('#x1').val(c.x);
+	$('#y1').val(c.y);
+	$('#w').val(c.w);
+	$('#h').val(c.h);
+
+	if (parseInt(c.w) > 0){
+		var  xsize = $('#preview-pane .preview-container').width();
+		var  ysize = $('#preview-pane .preview-container').height();
+		var rx = xsize / c.w;
+		var ry = ysize / c.h;
+
+        $("#preViewImg").css({
+	        width: Math.round(rx * boundx) + 'px',
+	        height: Math.round(ry * boundy) + 'px',
+	        marginLeft: '-' + Math.round(rx * c.x) + 'px',
+	        marginTop: '-' + Math.round(ry * c.y) + 'px'
+         });
+
+     }
+}
+
+function clearCoords(){
+    $('#coords input').val('');
+}
+
+
+
+ function preLocalImg(){
+		var url =  $("#fb").val();
+	    if(navigator.userAgent.indexOf("MSIE")>=1){
+	        url = url;
+	    }else{
+	        var firefoxFile = document.getElementById('fb').files[0];
+	        url = window.URL.createObjectURL(firefoxFile);
+	    }
+	    $("#imgPre").attr("src",url);
+	    $("#preViewImg").attr("src",url);
+	    var tmpUrl = $("#fb").val();
+	    var idx=tmpUrl.lastIndexOf(".");
+	   var suffix= tmpUrl.substring((idx+1),tmpUrl.length);
+	   $('#localImgFormat').val(suffix);
+	    $('#imgPre').Jcrop({
+            onChange:   showCoords,
+            onSelect:   showCoords,
+            onRelease:  clearCoords,
+            aspectRatio: 1.0
+        },function(){
+            var bounds = this.getBounds();
+            boundx = bounds[0];
+            boundy = bounds[1];
+            jcrop_api = this;
+            $('#preview-pane').appendTo(jcrop_api.ui.holder);
+        });
+	    jcrop_api.setImage(url);
+	}
+</script>
+</head>
+<body>
+	<div id="dialogForLocalImageSelect" style="display: block;width:500px;height:500px;">
+
+		<form  enctype="multipart/form-data" id="localImg_upload_form" method="post">
+				<input id="fb" type="file" onchange="preLocalImg();" name="localImg" />
+			<div class="inline-labels">
+				<label>X <input type="text" size="4" id="x1" name="leftX" /></label>
+				<label>Y <input type="text" size="4" id="y1" name="leftY" /></label>
+				<label>W <input type="text" size="4" id="w" name="width" /></label>
+				<label>H <input type="text" size="4" id="h" name="height" /></label>
+				<label>文件名后缀 <input type="text" size="4" id="localImgFormat"
+					name="format" /></label>
+			</div>
+		</form>
+		<div>
+		<img id="imgPre" src=""
+			style="display: block; width: auto; height: auto; overflow: hidden;" />
+		<div id="preview-pane">
+			<div class="preview-container">
+				<img id="preViewImg" class="jcrop-preview" alt="Preview" />
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>
