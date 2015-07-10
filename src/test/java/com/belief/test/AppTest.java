@@ -17,6 +17,13 @@ public class AppTest {
 		// 获取后缀
 		String suffix = fileName.substring((idx + 1));
 		System.out.println(suffix);
+		System.out.println("-------------------");
+		double ratio = 1.66666666;
+		System.out.println(Math.ceil(ratio));
+		System.out.println(Math.floor(ratio));
+		ratio = 1.222222222;
+		System.out.println(Math.ceil(ratio));
+		System.out.println(Math.floor(ratio));
 
 	}
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dialogxxxxxxxxxxx-html</title>
+<script src="resources/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&amp;ak=oBuvX07ZD8KOszDZkrwkqlEi"></script>
+</head>
+<body>
+	<input type="button" id="showDialog" value="clickMe" />
+	<div id="dialog">
+		<div id="xxx"></div>
+	</div>
+
+</body>
+<script type="text/javascript">
+	$(function() {
+		 
+		$("#xxx").load("location.html",function(){
+			$("#l-map").height($(window).height()*0.98);
+		});
+	});
+</script>
+</html>

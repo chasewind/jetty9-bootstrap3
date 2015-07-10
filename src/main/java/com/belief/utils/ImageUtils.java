@@ -59,6 +59,8 @@ public class ImageUtils {
 				itemp = op.filter(bi, null);
 			}
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			// http://stackoverflow.com/questions/13605248/java-converting-image-to-bufferedimage
+			itemp = toBufferedImage(itemp);
 			ImageIO.write((BufferedImage) itemp, suffix, out);
 			newImageByte = out.toByteArray();
 		} catch (IOException e) {
@@ -69,6 +71,29 @@ public class ImageUtils {
 		return newImageByte;
 	}
 
+	/**
+	 * Converts a given Image into a BufferedImage
+	 *
+	 * @param img
+	 *            The Image to be converted
+	 * @return The converted BufferedImage
+	 */
+	public static BufferedImage toBufferedImage(Image img) {
+		if (img instanceof BufferedImage) {
+			return (BufferedImage) img;
+		}
+
+		// Create a buffered image with transparency
+		BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+		// Draw the image on to the buffered image
+		Graphics2D bGr = bimage.createGraphics();
+		bGr.drawImage(img, 0, 0, null);
+		bGr.dispose();
+
+		// Return the buffered image
+		return bimage;
+	}
 	public final static void reSizeTFile(byte[] imageByte, int height, int width, String suffix, String path) {
 		double ratio = 0.0; // 缩放比例
 		BufferedImage bi = null;
