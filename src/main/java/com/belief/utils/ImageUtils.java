@@ -59,6 +59,8 @@ public class ImageUtils {
 				itemp = op.filter(bi, null);
 			}
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			// http://stackoverflow.com/questions/13605248/java-converting-image-to-bufferedimage
+			itemp = toBufferedImage(itemp);
 			ImageIO.write((BufferedImage) itemp, suffix, out);
 			newImageByte = out.toByteArray();
 		} catch (IOException e) {
@@ -67,6 +69,54 @@ public class ImageUtils {
 		}
 
 		return newImageByte;
+	}
+
+	/**
+	 * Converts a given Image into a BufferedImage
+	 *
+	 * @param img
+	 *            The Image to be converted
+	 * @return The converted BufferedImage
+	 */
+	public static BufferedImage toBufferedImage(Image img) {
+		if (img instanceof BufferedImage) {
+			return (BufferedImage) img;
+		}
+
+		// Create a buffered image with transparency
+		BufferedImage bimage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+
+		// Draw the image on to the buffered image
+		Graphics2D bGr = bimage.createGraphics();
+		bGr.drawImage(img, 0, 0, null);
+		bGr.dispose();
+
+		// Return the buffered image
+		return bimage;
+	}
+	public final static void reSizeTFile(byte[] imageByte, int height, int width, String suffix, String path) {
+		double ratio = 0.0; // 缩放比例
+		BufferedImage bi = null;
+
+		try {
+			bi = ImageIO.read(new ByteArrayInputStream(imageByte));
+
+			Image itemp = bi.getScaledInstance(width, height, BufferedImage.SCALE_SMOOTH);
+			// 计算比例
+			if ((bi.getHeight() > height) || (bi.getWidth() > width)) {
+				if (bi.getHeight() > bi.getWidth()) {
+					ratio = (new Integer(height)).doubleValue() / bi.getHeight();
+				} else {
+					ratio = (new Integer(width)).doubleValue() / bi.getWidth();
+				}
+				AffineTransformOp op = new AffineTransformOp(AffineTransform.getScaleInstance(ratio, ratio), null);
+				itemp = op.filter(bi, null);
+			}
+			ImageIO.write((BufferedImage) itemp, suffix, new File(path, System.currentTimeMillis() + "_resize.jpg"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -220,7 +270,7 @@ public class ImageUtils {
 		TexturePaint tp = new TexturePaint(big, rectangle);
 		g2D.setPaint(tp);
 		g2D.fill(area1);
-		ImageIO.write(combined, "JPG", new File(path, "33.jpg"));
+		ImageIO.write(combined, "JPG", new File(path, "332.jpg"));
 	}
 
 	public static InputStream fillPic(File smallImg, File bigImg, ImageCutVO imageCutVO) throws IOException {
@@ -249,5 +299,66 @@ public class ImageUtils {
 		g2D.fill(area1);
 		ImageIO.write(buffer, imageCutVO.getFormat(), imOut);
 		return new ByteArrayInputStream(bs.toByteArray());
+	}
+
+	/**
+	 * 指定的小图以椭圆的形式填充到大图里
+	 * 
+	 * @param smallImg
+	 * @param bigImg
+	 * @param imageCutVO
+	 * @return
+	 * @throws IOException
+	 */
+	public static InputStream fillPicInEllipse(InputStream smallImg, InputStream bigImg, ImageCutVO imageCutVO) throws IOException {
+
+		ImageOutputStream imOut;
+		ByteArrayOutputStream bs = new ByteArrayOutputStream();
+		imOut = ImageIO.createImageOutputStream(bs);
+
+		BufferedImage big = ImageIO.read(bigImg);
+		BufferedImage small = ImageIO.read(smallImg);
+		ImageFilter cropFilter;
+		Image img;
+		cropFilter = new CropImageFilter(0, 0, imageCutVO.getWidth(), imageCutVO.getHeight());
+		BufferedImage buffer = new BufferedImage(big.getWidth(), big.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics g = buffer.getGraphics();
+		img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(small.getSource(), cropFilter));
+		g.drawImage(img, imageCutVO.getLeftX(), imageCutVO.getLeftY(), null);
+		Rectangle2D.Float rectangle = new Rectangle2D.Float(0, 0, big.getWidth(), big.getHeight());
+		Ellipse2D.Float ellipse = new Ellipse2D.Float(imageCutVO.getLeftX(), imageCutVO.getLeftY(), imageCutVO.getWidth(), imageCutVO.getHeight());
+		Area area1 = new Area(rectangle);
+		Area area2 = new Area(ellipse);
+		area1.subtract(area2);
+		Graphics2D g2D = (Graphics2D) g;
+		TexturePaint tp = new TexturePaint(big, rectangle);
+		g2D.setPaint(tp);
+		g2D.fill(area1);
+		ImageIO.write(buffer, imageCutVO.getFormat(), imOut);
+		return new ByteArrayInputStream(bs.toByteArray());
+	}
+
+	public static void fillPicInEllipseFile(InputStream smallImg, InputStream bigImg, ImageCutVO imageCutVO, String path) throws IOException {
+
+		BufferedImage big = ImageIO.read(bigImg);
+		BufferedImage small = ImageIO.read(smallImg);
+		ImageFilter cropFilter;
+		Image img;
+		cropFilter = new CropImageFilter(0, 0, imageCutVO.getWidth(), imageCutVO.getHeight());
+		BufferedImage buffer = new BufferedImage(big.getWidth(), big.getHeight(), BufferedImage.TYPE_INT_RGB);
+		Graphics g = buffer.getGraphics();
+		img = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(small.getSource(), cropFilter));
+		g.drawImage(img, imageCutVO.getLeftX(), imageCutVO.getLeftY(), null);
+		Rectangle2D.Float rectangle = new Rectangle2D.Float(0, 0, big.getWidth(), big.getHeight());
+		Ellipse2D.Float ellipse = new Ellipse2D.Float(imageCutVO.getLeftX(), imageCutVO.getLeftY(), imageCutVO.getWidth(), imageCutVO.getHeight());
+		Area area1 = new Area(rectangle);
+		Area area2 = new Area(ellipse);
+		area1.subtract(area2);
+		Graphics2D g2D = (Graphics2D) g;
+		TexturePaint tp = new TexturePaint(big, rectangle);
+		g2D.setPaint(tp);
+		// g2D.setColor(new Color(11, 19, 25));
+		g2D.fill(area1);
+		ImageIO.write(buffer, imageCutVO.getFormat(), new File(path, System.currentTimeMillis() + "_112.png"));
 	}
 }

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+body, html {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+
+#l-map {
+	height: 80%;
+	width: 100%;
+}
+
+#r-result {
+	margin : 5px;
+}
+</style>
+<script type="text/javascript"
+	src="http://api.map.baidu.com/api?v=2.0&amp;ak=oBuvX07ZD8KOszDZkrwkqlEi"></script>
+<title>获取地理信息</title>
+</head>
+<body>
+	<div id="r-result">
+		搜索:  <input type="text" id="suggestId" size="20" value="百度"
+			style="width: 150px;" />
+	</div>
+	<div id="searchResultPanel_xx"
+		style="border: 1px solid #C0C0C0; width: 150px; height: auto; display: none;">
+	</div>
+	<div id="l-map"></div>
+	<div> 
+		<p id="location_info"></p>
+		<input type="button" onclick="finish();" value="完成定位" />
+	</div>
+</body>
+</html>
+<script type="text/javascript" th:inline="javascript">
+	// 百度地图API功能
+	function G_xx(id) {
+		return document.getElementById(id);
+	}
+
+	var map_xxxxx = new BMap.Map("l-map");
+	map_xxxxx.centerAndZoom("北京", 14); // 初始化地图,设置城市和地图级别。
+
+	// 添加带有定位的导航控件
+	var navigationControl = new BMap.NavigationControl({
+		// 靠左上角位置
+		anchor : BMAP_ANCHOR_TOP_LEFT,
+		// LARGE类型
+		type : BMAP_NAVIGATION_CONTROL_LARGE,
+		// 启用显示定位
+		enableGeolocation : true
+	});
+	map_xxxxx.addControl(navigationControl);
+	// 添加定位控件
+	var geolocationControl = new BMap.GeolocationControl();
+	geolocationControl.addEventListener("locationSuccess", function(e) {
+		// 定位成功事件
+		var address = '';
+		address += e.addressComponent.province;
+		address += e.addressComponent.city;
+		address += e.addressComponent.district;
+		address += e.addressComponent.street;
+		address += e.addressComponent.streetNumber;
+		alert("当前定位地址为：" + address);
+	});
+	geolocationControl.addEventListener("locationError", function(e) {
+		// 定位失败事件
+		alert(e.message);
+	});
+	map_xxxxx.addControl(geolocationControl);
+
+	var ac_baidu_map = new BMap.Autocomplete( //建立一个自动完成的对象
+	{
+		"input" : "suggestId",
+		"location" : map_xxxxx
+	});
+
+	ac_baidu_map.addEventListener("onhighlight", function(e) { //鼠标放在下拉列表上的事件
+		var str = "";
+		var _value = e.fromitem.value;
+		var value = "";
+		if (e.fromitem.index > -1) {
+			value = _value.province + _value.city + _value.district
+					+ _value.street + _value.business;
+		}
+		str = "FromItem<br />index = " + e.fromitem.index + "<br />value = "
+				+ value;
+
+		value = "";
+		if (e.toitem.index > -1) {
+			_value = e.toitem.value;
+			value = _value.province + _value.city + _value.district
+					+ _value.street + _value.business;
+		}
+		str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = "
+				+ value;
+		G_xx("searchResultPanel_xx").innerHTML = str;
+	});
+
+	var myValue;
+	ac_baidu_map.addEventListener("onconfirm", function(e) { //鼠标点击下拉列表后的事件
+		var _value = e.item.value;
+		myValue = _value.province + _value.city + _value.district
+				+ _value.street + _value.business;
+		G_xx("searchResultPanel_xx").innerHTML = "onconfirm<br />index = "
+				+ e.item.index + "<br />myValue = " + myValue;
+
+		setPlace();
+	});
+
+	function setPlace() {
+		
+		function myFun() {
+			var pp = local.getResults().getPoi(0).point; //获取第一个智能搜索的结果
+			map_xxxxx.centerAndZoom(pp, 16);
+			addMarker(pp);
+		}
+		var local = new BMap.LocalSearch(map_xxxxx, { //智能搜索
+			onSearchComplete : myFun
+		});
+		local.search(myValue);
+	}
+	
+	var marker;
+	function addMarker(pp) {
+		map_xxxxx.clearOverlays(); //清除地图上所有覆盖物
+		marker = new BMap.Marker(pp);
+		map_xxxxx.addOverlay(marker); //添加标注
+		marker.enableDragging();
+	}
+	
+	function finish() {
+		var p = marker.getPosition();
+		document.getElementById('location_info').innerHTML=
+			"您现在的位置" + + p.lng + "," + p.lat;
+	}
+
+	
+	function autoLocation(result){
+		myValue = result.name;
+		setPlace();
+	}
+	
+	var myCity = new BMap.LocalCity();
+	myCity.get(autoLocation);
+	
+</script>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dialogxxxxxxxxxxx-html</title>
+<link href="resources/css/jquery-ui-1.9.2.custom.css" rel="stylesheet">
+<script src="resources/js/jquery-1.10.2.min.js"></script>
+<script src="resources/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&amp;ak=oBuvX07ZD8KOszDZkrwkqlEi"></script>
+</head>
+<body>
+	<input type="button" id="showDialog" value="clickMe" />
+	<div id="dialog">
+		<div id="xxx"></div>
+	</div>
+
+</body>
+<script type="text/javascript">
+	$(function() {
+	 
+		$('#dialog').dialog({
+			title:"地理位置信息录入",
+			autoOpen : false,
+			width : 1000,
+			height:600,
+			buttons : {
+				"Ok" : function() {
+					alert($('#zzzzzzzz').val());
+					$('#dialog').dialog("close");
+				},
+				"Cancel" : function() {
+					$('#dialog').dialog("close");
+				}
+			}
+		});
+		$("#showDialog").click(function() {
+			
+			$("#xxx").load("location.html",function(){
+				$("#l-map").height($(window).height()*0.98);
+			});
+			
+			$('#dialog').dialog('open');
+			
+			return false;
+		});
+	});
+</script>
+</html>
