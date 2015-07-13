@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS02-rule match谨言慎行</title>
+<style>
+* {
+	font-size: 20px;
+}
+</style>
+</head>
+<body>
+	<ol>
+		<li>对于选择器中给定的各个ID属性值，加0,1,0,0</li>
+		<li>对于选择器中给定的各个类属性值，属性选择或伪类，加0,0,1,0</li>
+		<li>对于选择器中给定的各个元素和伪元素，加0,0,0,1</li>
+		<li>结合符和通配符没有贡献</li>
+		<li>每个占位符的最大值有限，http://www.thecssninja.com/css/extreme-specificity</li>
+	</ol>
+	<h1>(h1{color:red;} 0,0,0,1)</h1>
+	<h1>(p em{color:red;} 0,0,0,2)</h1>
+	<h1>(.grade{color:purple;} 0,0,1,0)</h1>
+	<h1>(*.bright{color:yellow;} 0,0,1,0)</h1>
+	<h1>(p.bright em.dark{color:maroon;} 0,0,2,2)</h1>
+	<h1>(#id216{color:blue;} 0,1,0,0)</h1>
+	<h1>(div#sidebar *[href]{color:silver;} 0,1,1,1)</h1>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+</body>
+</html>

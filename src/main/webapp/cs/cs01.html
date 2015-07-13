@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CSS01</title>
+<style>
+* {
+	font-size: 20px;
+}
+
+.warning {
+	font-weight: bold;
+}
+
+.urgent {
+	font-style: italic;
+}
+
+.warning.urgent {
+	background: silver;
+}
+
+p.warning.help {
+	background: red;
+}
+
+h1[class] {
+	color: silver;
+}
+
+span[class*='cloud'] {
+	font-style: italic;
+}
+
+span[class^='bar'] {
+	bacckground: silver;
+}
+
+span[class$='y'] {
+	font-weight: bold;
+}
+
+h1>strong {
+	color: red;
+}
+
+h1:first-letter {
+	color: red;
+	font-size: 40px;
+}
+
+h2:first-letter {
+	font-size: 200%;
+}
+p:first-line{
+	color:purple;
+}
+h2:after{
+content: "{!!!!!!}";
+color:silver;
+}
+</style>
+</head>
+<body>
+	<p class='urgent warning'>When handling plutonium,care must be
+		taken to avoid the formation of a critical mass.</p>
+	<p>
+		With plutonium,<span class="warning">the possibility of
+			implosion is very real,and must be avoided at all costs</span>, This can be
+		accomplished by keeping the various masses separate.
+	</p>
+	<p class='warning urgent help'>Help Me!</p>
+
+	<h1 class="hoopla">Hello</h1>
+	<h1 class="servere">Serenity</h1>
+	<h1 class="fancy">Fooling</h1>
+
+	<span class="barren rocky">Mercury</span>
+	<br />
+	<span class="cloudy barreen">venus</span>
+	<br>
+	<span class='life-bearing cloudy'>Earth</span>
+
+
+	<h1>
+		This is <strong>very </strong>Important
+	</h1>
+	<h1>
+		This is <em>really <strong>very </strong></em>important
+	</h1>
+
+
+
+	<h2>contribution</h2>
+	<h2>人生又不是阅读理解，哪来那么多富含深意的片段</h2>
+	<h2>有能力有脾气的人，怀才不遇</h2>
+	<h2>有能力没脾气的人，春风得意</h2>
+	<h2>没能力有脾气的人，一事无成</h2>
+	<h2>没能力没脾气的人，贵人相助</h2>
+
+
+
+</body>
+</html>
