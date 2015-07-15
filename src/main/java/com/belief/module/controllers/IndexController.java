@@ -37,6 +37,18 @@ public class IndexController {
 		return "jsonTest";
 	}
 
+	@RequestMapping("/userLogin")
+	public String userLogin() {
+		return "login";
+	}
+
+	@RequestMapping("/goToMainPage")
+	public String getLoginInfo(String j_username, String j_password) {
+		System.out.println(j_username);
+		System.out.println(j_password);
+		return "gridPage";
+	}
+
 	@ResponseBody
 	@RequestMapping("/getJsonData")
 	public PageInfo<Product> getJsonData(int offset, int limit, String search) {
@@ -54,6 +66,7 @@ public class IndexController {
 	public String gridPage() {
 		return "gridPage";
 	}
+
 	@ResponseBody
 	@RequestMapping("/getGridData")
 	public GridPage<Product> getGridData(int page, int rows) {

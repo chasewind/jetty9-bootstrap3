@@ -117,12 +117,12 @@ label{
 </head>
 <body>
 	<div id="loginDiv">
-		<form action="/j_spring_security_check" th:action="/" method="post" id="loginForm">
+		<form action="/j_spring_security_check" th:action="goToMainPage" method="post" id="loginForm">
 			<h1>用户登录</h1>
 			<label id="info"></label>
 			<label ></label>
 			<fieldset>
-				<input name="j_username"  class="inputWrap" type="text" placeholder="请输入用户名" />
+				<input name="j_username" id="inputUsername"  class="inputWrap" type="text" placeholder="请输入用户名" />
 			</fieldset>
 			<fieldset>
 				<input name="j_password" id="inputPassword"  class="inputWrap" type="password" placeholder="请输入密码" />
@@ -157,13 +157,26 @@ $(function(){
 
          errorPlacement : function(error, element) {
         	 $("#info").append(error);
-         },
-
-         submitHandler : function(form) {
-        	 $('#inputPassword').val(CryptoJS.MD5($('#inputPassword').val()));
-             $(form).submit();
          }
+         //在这里处理异步提交很慢很慢
+//          ,
+
+//          submitHandler : function(form) {
+//         	 $('#inputPassword').val(CryptoJS.MD5($('#inputPassword').val()));
+//              $(form).submit();
+//          }
      });
+	 
+	 
+	 $('#loginForm').submit(function(){
+		 var userName = $("#inputUsername").val();
+		 var passWord = $("#inputPassword").val();
+			if(userName==""|| passWord == ""){
+				return false;
+			}
+		 $('#inputPassword').val(CryptoJS.MD5($('#inputPassword').val()));
+			return true;
+	});
 });
 </script>
 </html>
