@@ -29,7 +29,8 @@ public class IndexController {
 
 	@RequestMapping("/index")
 	public String index() {
-		return "ace2";
+		throw new RuntimeException("good job!");
+		// return "ace2";
 	}
 
 	@RequestMapping("/jsonTest")
