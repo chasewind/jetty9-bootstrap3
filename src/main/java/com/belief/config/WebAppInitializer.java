@@ -4,6 +4,7 @@ import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -31,7 +32,8 @@ public class WebAppInitializer extends
 		characterEncodingFilter.setEncoding("UTF-8");
 		characterEncodingFilter.setForceEncoding(true);
 		ShallowEtagHeaderFilter etagFilter = new ShallowEtagHeaderFilter();
-		return new Filter[] { characterEncodingFilter, etagFilter };
+		DelegatingFilterProxy securityFilterChain = new DelegatingFilterProxy("springSecurityFilterChain");
+		return new Filter[] { characterEncodingFilter, securityFilterChain, etagFilter };
 	}
 
 	@Override
