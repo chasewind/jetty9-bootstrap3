@@ -2,9 +2,6 @@ package com.belief.config;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -107,66 +104,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 		return thymeleafViewResolver;
 	}
 
-	/**
-	 * <code>
-	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="exceptionMappings">
-			<props>
-				<prop key="java.lang.Exception">errors/error</prop>
-				<prop key="java.lang.Throwable">errors/err</prop>
-			</props>
-		</property>
-		<property name="statusCodes">
-			<props>
-				<prop key="errors/error">500</prop>
-				<prop key="errors/404">404</prop>
-			</props>
-		</property>
-		<!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->
-		<property name="warnLogCategory" value="WARN"></property>
-		<!-- 默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置 -->
-		<property name="defaultErrorView" value="errors/error"></property>
-		<!-- 默认HTTP状态码 -->
-		<property name="defaultStatusCode" value="500"></property>
-	</bean>
-	</code>
-	 **/
-
-	/**
-	 * <code>
-	<bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-	<!-- 定义默认的异常处理页面，当该异常类型的注册时使用 -->
-	<property name="defaultErrorView" value="error"></property>
-	<!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->
-	<property name="exceptionAttribute" value="ex"></property>
-	<!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 -->
-	<property name="exceptionMappings">
-		<props>
-			<prop key="cn.basttg.core.exception.BusinessException">error-business</prop>
-			<prop key="cn.basttg.core.exception.ParameterException">error-parameter</prop>
-
-			<!-- 这里还可以继续扩展对不同异常类型的处理 -->
-		</props>
-	</property>
-</bean>
-</code>
-	 **/
-
 	// 全局异常处理页面
 	@Bean
 	public SimpleMappingExceptionResolver simpleMappingExceptionResolver() {
-		SimpleMappingExceptionResolver simpleMappingExceptionResolver = new SimpleMappingExceptionResolver();
-		Properties mappings = new Properties();
-		mappings.setProperty("java.lang.Exception", "errors/exception");
-		mappings.setProperty("java.lang.Throwable", "errors/error");
-		simpleMappingExceptionResolver.setExceptionMappings(mappings);
-		Properties statusCodes = new Properties();
-		// 500
-		statusCodes.setProperty("errors/exception", "500");
-		// 404
-		statusCodes.setProperty("errors/error", "404");
-		simpleMappingExceptionResolver.setStatusCodes(statusCodes);
-		simpleMappingExceptionResolver.setDefaultStatusCode(HttpServletResponse.SC_NOT_FOUND);
+		SimpleMappingExceptionResolver simpleMappingExceptionResolver = new CustomiseMappingExceptionResolver();
 		return simpleMappingExceptionResolver;
 	}
 

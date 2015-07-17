@@ -24,6 +24,7 @@ public class AnnotationTestJetty {
         WebAppContext webAppContext = new WebAppContext();
         webAppContext.setResourceBase("src/main/webapp");
         webAppContext.setContextPath("/");
+		webAppContext.setErrorHandler(null);
         // http://www.blogjava.net/DLevin/archive/2014/05/06/413129.html
         webAppContext.setConfigurations(new Configuration[] {new AnnotationConfiguration() {
             @Override

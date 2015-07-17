@@ -1,6 +1,7 @@
 package com.belief.config;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
@@ -31,5 +32,10 @@ public class WebAppInitializer extends
 		characterEncodingFilter.setForceEncoding(true);
 		ShallowEtagHeaderFilter etagFilter = new ShallowEtagHeaderFilter();
 		return new Filter[] { characterEncodingFilter, etagFilter };
+	}
+
+	@Override
+	protected void registerContextLoaderListener(ServletContext servletContext) {
+		super.registerContextLoaderListener(servletContext);
 	}
 }
