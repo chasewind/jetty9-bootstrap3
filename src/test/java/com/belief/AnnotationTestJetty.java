@@ -8,7 +8,7 @@ import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.springframework.web.WebApplicationInitializer;
 
-import com.belief.config.WebAppInitializer;
+import com.live.cconfig.WebAppInitializer;
 
 /**
  * 基于注解，完全脱离<b>web.xml</b><br>

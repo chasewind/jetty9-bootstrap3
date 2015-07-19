@@ -1,4 +1,4 @@
-package com.belief.config;
+package com.live.cconfig;
 
 import java.util.ArrayList;
 import java.util.List;
