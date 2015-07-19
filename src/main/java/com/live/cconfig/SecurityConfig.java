@@ -1,4 +1,4 @@
-package com.belief.config;
+package com.live.cconfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 /**
- * 该类被ServiceConfig扫描注入WebApplicationContext
+ * 该类从被扫描的包中移出来，也没有直接指定加入WebAppInitializer的RootConfigClasses，需要查找该类被什么类扫描注入
  * 
  * @author YuDongwei
  *

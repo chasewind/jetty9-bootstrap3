@@ -1,4 +1,4 @@
-package com.belief.config;
+package com.live.cconfig;
 
 import javax.servlet.Filter;
 import javax.servlet.ServletContext;

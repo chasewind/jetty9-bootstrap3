@@ -1,4 +1,4 @@
-package com.belief.core;
+package com.belief;
 
 import java.util.Arrays;
 

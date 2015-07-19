@@ -1,4 +1,4 @@
-package com.belief.config;
+package com.live.cconfig;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -8,11 +8,10 @@ import org.eclipse.jetty.webapp.Configuration;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.springframework.web.WebApplicationInitializer;
 
-import com.belief.config.WebAppInitializer;
+import com.live.cconfig.WebAppInitializer;
 
 /**
  * 基于注解，完全脱离<b>web.xml</b><br>
- * 和项目代码com.belief.core.AnnotationJetty一样，由于日志的原因可以清楚的找到错误
  * 
  * @author 于东伟
  *
@@ -24,7 +23,7 @@ public class AnnotationTestJetty {
         WebAppContext webAppContext = new WebAppContext();
         webAppContext.setResourceBase("src/main/webapp");
         webAppContext.setContextPath("/");
-		webAppContext.setErrorHandler(null);
+        webAppContext.setErrorHandler(null);
         // http://www.blogjava.net/DLevin/archive/2014/05/06/413129.html
         webAppContext.setConfigurations(new Configuration[] {new AnnotationConfiguration() {
             @Override
