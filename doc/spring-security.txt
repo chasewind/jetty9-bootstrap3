@@ -29,7 +29,29 @@ For example, if the user agent uses 'Aladdin' as the username and 'open sesame' 
 	Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 
 -------------------------------------------------------------------------------
+spring filter chain
 
+----------------------------------------------------------------
+alias        					filter-class					
 
+CHANNEL_FILTER					ChannelProcessingFilter
+SECURITY_CONTEXT_FILTER			SecurityContextPersistenceFilter
+CONCURRENT_SESSION_FILTER		ConcurrentSessionFilter
+HEADERS_FILTER					HeaderWriterFilter
+CSRF_FILTER						CsrfFilter
+LOGOUT_FILTER					LogoutFilter
+X509_FILTER						X509AuthenticationFilter
+PRE_AUTH_FILTER					AbstractPreAuthenticatedProcessingFilter
+CAS_FILTER						CasAuthenticationFilter
+FORM_LOGIN_FILTER				UsernamePasswordAuthenticationFilter
+BASIC_AUTH_FILTER				BasicAuthenticationFilter
+SERVLET_API_SUPPORT_FILTER		SecurityContextHolderAwareRequestFilter
+JAAS_API_SUPPORT_FILTER			JaasApiIntegrationFilter
+REMEMBER_ME_FILTER				RememberMeAuthenticationFilter
+ANONYMOUS_FILTER				AnonymousAuthenticationFilter
+SESSION_MANAGEMENT_FILTER		SessionManagementFilter
+EXCEPTION_TRANSLATION_FILTER	ExceptionTranslationFilter
+filter_security_interceptor		FilterSecurityInterceptor
+SWITCH_USER_FITER				SwitchUserFilter
 
 
