@@ -1,4 +1,4 @@
-package com.belief.task;
+package com.echo.task;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
