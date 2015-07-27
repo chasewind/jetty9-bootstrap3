@@ -17,7 +17,7 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 	private Logger logger = LoggerFactory.getLogger(getClass());
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[] {ServiceConfig.class};
+		return new Class<?>[] { ServiceConfig.class, TaskConfig.class };
     }
 
     @Override
