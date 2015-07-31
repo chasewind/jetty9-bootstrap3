@@ -1,0 +1,25 @@
+服务端证书
+
+keytool -genkey -v -alias bosServerKey  -dname "CN=bosServerKey" -keyalg RSA -keypass chaseecho -storepass chaseecho -keystore server.keystore -validity 3600
+
+
+
+ 
+客户端证书
+keytool -genkey -v -alias yitaoKey  -dname "CN=XuYiTao" -keyalg RSA -keypass admin123 -storepass admin123 -keystore yitao.p12 -validity 3600 -storetype PKCS12
+
+
+keytool -genkey -v -alias xiaohuaKey  -dname "CN=XieXiaoHua" -keyalg RSA -keypass admin123 -storepass admin123 -keystore xiaohua.p12 -validity 3600 -storetype PKCS12
+
+
+导出客户端认证文件
+keytool -export -alias yitaoKey -file yitaoKey.cer -keystore yitao.p12 -storepass admin123 -storetype PKCS12
+
+
+keytool -export -alias xiaohuaKey -file xiaohuaKey.cer -keystore xiaohua.p12 -storepass admin123 -storetype PKCS12
+服务器端认证
+keytool -import -v -alias yitaoKey -file yitaoKey.cer -keystore server.keystore -storepass chaseecho
+
+
+keytool -import -v -alias xiaohuaKey -file xiaohuaKey.cer -keystore server.keystore -storepass chaseecho
+

@@ -21,6 +21,9 @@ public class PVTask {
 					continue;
 				}
 			}
+			if (i == 40) {
+				throw new RuntimeException(RandomStringUtils.randomAlphanumeric(30));
+			}
 		}
 	}
 }
