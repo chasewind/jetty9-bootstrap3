@@ -9,7 +9,6 @@
 		<spring.version>4.1.6.RELEASE</spring.version>
 		<!-- <jetty.version>9.0.6.v20130930</jetty.version> -->
 		<jetty.version>9.2.12.M0</jetty.version>
-		<!-- <jetty.version>9.3.0.v20150612</jetty.version> -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>

@@ -1,25 +1,37 @@
+
+客户端和服务端SSL协议认证步骤
 服务端证书
+一、生成服务端密钥
+keytool -genkey -v -alias serverKey  -keyalg RSA -keypass chaseecho -storepass chaseecho -keystore server.keystore -validity 3600
+下面是输入的参数
+CN=Yu Dongwei, OU=com.belief, O=belief, L=hangzhou, ST=zhejiang, C=zh是否正确?
 
-keytool -genkey -v -alias bosServerKey  -dname "CN=bosServerKey" -keyalg RSA -keypass chaseecho -storepass chaseecho -keystore server.keystore -validity 3600
-
-
-
- 
-客户端证书
-keytool -genkey -v -alias yitaoKey  -dname "CN=XuYiTao" -keyalg RSA -keypass admin123 -storepass admin123 -keystore yitao.p12 -validity 3600 -storetype PKCS12
-
-
-keytool -genkey -v -alias xiaohuaKey  -dname "CN=XieXiaoHua" -keyalg RSA -keypass admin123 -storepass admin123 -keystore xiaohua.p12 -validity 3600 -storetype PKCS12
+二、生成服务端的证书
+keytool -export -alias serverkey -keystore server.keystore -file server.crt -storepass chaseecho 
 
 
-导出客户端认证文件
-keytool -export -alias yitaoKey -file yitaoKey.cer -keystore yitao.p12 -storepass admin123 -storetype PKCS12
+三、服务端证书加入信任列表中
+
+keytool -import -alias serverkey -file server.crt -keystore trustOfClient.keystore -storepass chaseecho
+
+四、客户端密钥生成
+
+keytool -genkey -v -alias clientKey  -keyalg RSA -keypass admin123 -storepass admin123 -keystore client.keystore -validity 3600  
+参数
+
+CN=Yu Dongwei, OU=com.belief, O=belief, L=hangzhou, ST=zhejiang, C=zh-ch是否正确?
 
 
-keytool -export -alias xiaohuaKey -file xiaohuaKey.cer -keystore xiaohua.p12 -storepass admin123 -storetype PKCS12
-服务器端认证
-keytool -import -v -alias yitaoKey -file yitaoKey.cer -keystore server.keystore -storepass chaseecho
+
+五、客户端证书生成
+
+keytool -export -alias clientKey -keystore client.keystore -file  client.crt -storepass admin123 
+
+六、客户端证书交给服务端
+
+keytool -import -alias serverkey -file client.crt -keystore trustOfServer.keystore -storepass admin123
 
 
-keytool -import -v -alias xiaohuaKey -file xiaohuaKey.cer -keystore server.keystore -storepass chaseecho
+
+
 
