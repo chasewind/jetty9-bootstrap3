@@ -1,0 +1,125 @@
+服务端证书
+
+keytool -genkey -v -alias bosServerKey  -dname "CN=bosServerKey" -keyalg RSA -keypass chaseecho -storepass chaseecho -keystore server.keystore -validity 3600
+
+
+ 
+客户端证书
+keytool -genkey -v -alias clientKey  -dname "CN=bosClientKey"   -keyalg RSA -keypass admin123 -storepass admin123 -keystore client.p12 -validity 3600 -storetype PKCS12
+
+
+
+导出客户端认证文件
+keytool -export -alias clientKey -file clientKey.cer -keystore client.p12 -storepass admin123 -storetype PKCS12
+
+
+
+服务器端认证
+keytool -import -v -alias clientKey -file clientKey.cer -keystore server.keystore -storepass chaseecho
+
+客户端安装client.p12
+
+访问
+
+https://127.0.0.1:8443/taxi-restapi/update/check?clientVersion=2
+
+
+
+web配置
+
+
+
+
+
+
+
+
+<security-constraint>
+    <web-resource-collection>
+        <web-resource-name>bos</web-resource-name>
+        <url-pattern>/*</url-pattern>
+    </web-resource-collection>
+    <user-data-constraint>
+        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+</security-constraint>
+
+
+
+
+ Connector httpsConnector = new Connector();
+       httpsConnector.setPort(443);
+       httpsConnector.setSecure(true);
+       httpsConnector.setScheme("https");
+       httpsConnector.setAttribute("keyAlias", keyAlias);
+       httpsConnector.setAttribute("keystorePass", password);
+       httpsConnector.setAttribute("keystoreFile", keystorePath);
+       httpsConnector.setAttribute("clientAuth", "false");
+       httpsConnector.setAttribute("sslProtocol", "TLS");
+       httpsConnector.setAttribute("SSLEnabled", true);
+
+       Tomcat tomcat = new Tomcat();
+       //...
+       Service service = tomcat.getService();
+       service.addConnector(httpsConnector);
+
+
+-------------------------------------------------------------
+服务端证书
+
+keytool -genkey -v -alias bosServerKey  -dname "CN=bosServerKey" -keyalg RSA -keypass chaseecho -storepass chaseecho -keystore server.keystore -validity 3600
+
+
+
+ 
+客户端证书
+keytool -genkey -v -alias yitaoKey  -dname "CN=XuYiTao" -keyalg RSA -keypass admin123 -storepass admin123 -keystore yitao.p12 -validity 3600 -storetype PKCS12
+
+
+keytool -genkey -v -alias xiaohuaKey  -dname "CN=XieXiaoHua" -keyalg RSA -keypass admin123 -storepass admin123 -keystore xiaohua.p12 -validity 3600 -storetype PKCS12
+
+
+导出客户端认证文件
+keytool -export -alias yitaoKey -file yitaoKey.cer -keystore yitao.p12 -storepass admin123 -storetype PKCS12
+
+
+keytool -export -alias xiaohuaKey -file xiaohuaKey.cer -keystore xiaohua.p12 -storepass admin123 -storetype PKCS12
+服务器端认证
+keytool -import -v -alias yitaoKey -file yitaoKey.cer -keystore server.keystore -storepass chaseecho
+
+
+keytool -import -v -alias xiaohuaKey -file xiaohuaKey.cer -keystore server.keystore -storepass chaseecho
+
+
+-------------------------------------------------------------------------------------------
+
+keytool -genkey -v -alias taxiServerKey -dname "CN=taxiServerKey"   -keyalg RSA -keypass chaseecho -storepass chaseecho -keystore server.keystore -validity 3600
+
+keytool -genkey -v -alias taxiClientKey -dname "CN=taxiClientKey"  -keyalg RSA -keypass admin123 -storepass admin123 -keystore client.keystore -validity 3600
+
+
+
+keytool -export -alias taxiServerKey -keystore server.keystore -file server.crt  -keypass chaseecho -storepass chaseecho
+
+keytool -export -alias taxiClientKey -keystore client.keystore -file client.crt  -keypass admin123 -storepass admin123
+
+
+keytool -import -v -alias taxiClientKey -file client.crt -keystore server.keystore -storepass chaseecho  -keypass chaseecho
+
+---------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
