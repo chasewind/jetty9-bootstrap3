@@ -47,21 +47,31 @@ web配置
 
 
 
- Connector httpsConnector = new Connector();
-       httpsConnector.setPort(443);
-       httpsConnector.setSecure(true);
-       httpsConnector.setScheme("https");
-       httpsConnector.setAttribute("keyAlias", keyAlias);
-       httpsConnector.setAttribute("keystorePass", password);
-       httpsConnector.setAttribute("keystoreFile", keystorePath);
-       httpsConnector.setAttribute("clientAuth", "false");
-       httpsConnector.setAttribute("sslProtocol", "TLS");
-       httpsConnector.setAttribute("SSLEnabled", true);
-
-       Tomcat tomcat = new Tomcat();
-       //...
-       Service service = tomcat.getService();
-       service.addConnector(httpsConnector);
+public static void main(String[] args) throws Exception {
+		Tomcat tomcat = new Tomcat();
+		tomcat.setPort(9999);
+		tomcat.setBaseDir("target/tomcat");
+		tomcat.addWebapp("/", new File("src/main/webapp").getAbsolutePath());
+		String keystoreFile = new File("src/main/resources/server.keystore").getAbsolutePath();
+		Connector httpsConnector = new Connector();
+		httpsConnector.setPort(8444);
+		httpsConnector.setSecure(true);
+		httpsConnector.setScheme("https");
+		httpsConnector.setAttribute("protocol", "org.apache.coyote.http11.Http11Protocol");
+		httpsConnector.setAttribute("maxThreads", 200);
+		httpsConnector.setAttribute("keyAlias", "bosServerKey");
+		httpsConnector.setAttribute("keystorePass", "chaseecho");
+		httpsConnector.setAttribute("keystoreFile", keystoreFile);
+		httpsConnector.setAttribute("truststorePass", "chaseecho");
+		httpsConnector.setAttribute("truststoreFile", keystoreFile);
+		httpsConnector.setAttribute("clientAuth", "true");
+		httpsConnector.setAttribute("sslProtocol", "TLS");
+		httpsConnector.setAttribute("SSLEnabled", true);
+		Service service = tomcat.getService();
+		service.addConnector(httpsConnector);
+		tomcat.start();
+		tomcat.getServer().await();
+	}
 
 
 -------------------------------------------------------------
