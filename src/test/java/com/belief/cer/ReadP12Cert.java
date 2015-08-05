@@ -31,7 +31,7 @@ public class ReadP12Cert {
 			// detals tab <-- Certificate window <-- view <-- Certificate
 			// Button <-- Content tab <-- Internet Options <-- Tools menu
 			// In MS IE 6.
-			Enumeration<?> enum1 = ks.aliases();
+			Enumeration<String> enum1 = ks.aliases();
 			String keyAlias = null;
 			if (enum1.hasMoreElements()) // we are readin just one certificate.
 			{

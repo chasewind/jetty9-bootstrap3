@@ -17,16 +17,17 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 
 public class HttpsHelper {
-	static String KEYSTORE_FILE = "F:/authen/yitao.p12";
-	static String KEYSTORE_PASSWORD = "admin123";
+	static String KS_FILE = "F:/authen/yitao.p12";
+	static String KS_PASSWORD = "admin123";
 	static String TRUST_FILE = "F:/authen/server.keystore";
 	static String TRUST_PASSWORD = "chaseecho";
+	static String HOST_ADDR = "10.8.200.62";
 
 	public static void main(String[] args) throws Exception {
-		KeyStore keyStore = KeyStore.getInstance("PKCS12");
-		FileInputStream instream = new FileInputStream(new File(KEYSTORE_FILE));
+		KeyStore ks = KeyStore.getInstance("PKCS12");
+		FileInputStream instream = new FileInputStream(new File(KS_FILE));
 		try {
-			keyStore.load(instream, KEYSTORE_PASSWORD.toCharArray());
+			ks.load(instream, KS_PASSWORD.toCharArray());
 		} finally {
 			instream.close();
 		}
@@ -34,7 +35,7 @@ public class HttpsHelper {
 		SSLContext ctx = SSLContext.getInstance("TLS");
 		KeyManagerFactory kmf = KeyManagerFactory.getInstance("SunX509");
 		TrustManagerFactory tmf = TrustManagerFactory.getInstance("SunX509");
-		kmf.init(keyStore, KEYSTORE_PASSWORD.toCharArray());
+		kmf.init(ks, KS_PASSWORD.toCharArray());
 		KeyStore tks = KeyStore.getInstance("JKS");
 		tks.load(new FileInputStream(TRUST_FILE), TRUST_PASSWORD.toCharArray());
 		tmf.init(tks);
@@ -42,14 +43,14 @@ public class HttpsHelper {
 
 		// /////////////////
 		ssf = ctx.getSocketFactory();
-		SSLSocket socket = (SSLSocket) ssf.createSocket("127.0.0.1", 8443);
+		SSLSocket socket = (SSLSocket) ssf.createSocket(HOST_ADDR, 8443);
 		System.out.println("create socket success.");
 		// handshake
 		socket.startHandshake();
 		System.out.println("handshake success.");
 
 		// /////////////////////
-		URL url = new URL("https://127.0.0.1:8443/taxi-restapi/sys/config");
+		URL url = new URL("https://" + HOST_ADDR + ":8443/taxi-restapi/sys/config");
 
 		HttpsURLConnection urlConnection = (HttpsURLConnection) url.openConnection();
 		urlConnection.setSSLSocketFactory(ctx.getSocketFactory());
