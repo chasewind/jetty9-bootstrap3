@@ -1,0 +1,1 @@
+cmd /k keytool -import -alias ca -storepass Kunion2014@!# -file ca.crt -keystore ca.bks -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider
